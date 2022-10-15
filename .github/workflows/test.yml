@@ -1,0 +1,29 @@
+name: test
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create conda environment
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: environment.yml
+          environment-name: simple-patho
+
+      - name: Install test dependencies
+        shell: bash -l {0}
+        run: |
+          micromamba activate simple-patho
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Run tests
+        shell: bash -l {0}
+        run: |
+          micromamba activate simple-patho
+          make test
+          make lintci

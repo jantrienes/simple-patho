@@ -1,0 +1,30 @@
+name: simple-patho
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.9.12
+  - pip
+  - tqdm=4.64.0
+  - seaborn=0.11.2
+  - matplotlib=3.5.1
+  - pandas=1.4.2
+  - scikit-learn=1.0.2
+  - pytorch=1.12.1
+  - pip:
+    - spacy==3.4.1
+    - https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0.tar.gz
+    - https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.4.0/de_core_news_sm-3.4.0.tar.gz
+    - loguru==0.6.0
+    - nltk==3.7
+    - textstat==0.7.3
+    - eli5==0.13.0
+    - transformers==4.20.1
+    - datasets==2.3.2
+    - rouge-score==0.0.4
+    - git+https://github.com/feralvam/easse.git@8df369f025a7c927425482e802fb546fd5d06d84
+    - tensorboard
+    - wandb
+    - sentencepiece==0.1.97
+    - openpyxl==3.0.10
