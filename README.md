@@ -2,6 +2,16 @@
 
 TSAR2022
 
+**Contents:**
+1. [Computational Environment](#computational-environment)
+2. [Data Format](#data-format)
+3. [Corpus Statistics](#corpus-statistics)
+4. [Model Training and Evaluation](#model-training-and-evaluation)
+5. [Experiments on Cochrane Data (English, Medical)](#experiments-on-cochrane-data-english-medical)
+6. [Development](#development)
+7. [Citation](#citation)
+8. [Contact](#contact)
+
 ## Computational Environment
 
 ```sh
@@ -135,3 +145,24 @@ Results are given in the table below.
 | `mbart` | 43.77 | 19.16 | 41.14 | 14.59 | 20.64 | 372.61 | 0.08 | 0.04 | 0.06 |
 
 _\*Taken from [(Devaraj et al. 2021)](https://doi.org/10.18653/v1/2021.naacl-main.395)_, Table 6.
+
+
+## Development
+
+```
+make format
+make test
+make lint
+```
+
+## Citation
+
+If you use the resources presented in this repository, please cite:
+
+```bibtex
+<!-- TODO -->
+```
+
+## Contact
+
+If you have any question, please contact Jan Trienes at `jan.trienes [AT] uni-due.de`.
