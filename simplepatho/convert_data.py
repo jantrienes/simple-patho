@@ -39,7 +39,7 @@ def main(args):
 def arg_parser():
     parser = argparse.ArgumentParser(description="Convert raw data into jsonlines format.")
     parser.add_argument("--raw_path", type=str, help="Path to the raw data.")
-    parser.add_argument("--out_path", type=str, help="Path to the raw data.")
+    parser.add_argument("--out_path", type=str, help="Path to store the processed data.")
     return parser.parse_args()
 
 
