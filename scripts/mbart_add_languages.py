@@ -1,3 +1,9 @@
+"""
+Adds special language tags (e.g., de_COMPLEX, de_SIMPLE) to the mBART vocabulary.
+
+Based on Rios et al. (2022). See https://github.com/a-rios/longmbart/blob/e250cfc100401e263409bb147ed2f0ae9dfdc1c4/scripts/convert_mbart_to_longformerencoderdecoder.py
+"""
+
 import argparse
 
 import torch
