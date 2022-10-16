@@ -1,6 +1,10 @@
 # Patient-friendly Clinical Notes: Towards a new Text Simplification Dataset
 
-TSAR2022
+This repository provides the code for following paper:
+
+> Jan Trienes, Jörg Schlötterer, Hans-Ulrich Schildhaus, Christin Seifert. 2022. **Patient-friendly Clinical Notes: Towards a new Text Simplification Dataset.** _To Appear_.
+
+Sharing of the dataset is currently underway. For the time being, the code in the repository can be run with the paragraph-level simplification dataset by [Devaraj et al., (NAACL 2021)](https://doi.org/10.18653/v1/2021.naacl-main.395).
 
 **Contents:**
 1. [Computational Environment](#computational-environment)
