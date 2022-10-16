@@ -25,7 +25,6 @@ pip install -e .
 conda install cudatoolkit=11.6.0
 ```
 
-
 ## Data Format
 
 Data is expected to be split into train/val/test sets and to have one sample per line in source/target.
@@ -58,7 +57,7 @@ tree data/processed/$YOUR_DATASET
 
 ```sh
 python -m simplepatho.corpus_statistics \
-    --data_path data/raw/$YOUR_DATASET \
+    --data_path data/processed/$YOUR_DATASET \
     --language [english|german] \
     --spacy_model [en_core_web_sm|de_core_news_sm]
 ```
@@ -157,7 +156,7 @@ make lint
 
 ## Citation
 
-If you use the resources presented in this repository, please cite:
+If you use the resources in this repository, please cite:
 
 ```bibtex
 <!-- TODO -->
