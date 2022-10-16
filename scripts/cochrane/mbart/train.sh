@@ -1,8 +1,12 @@
+# Base configuration
+export WANDB_PROJECT=simplepatho
+export DATASET=cochrane
+export RUN_NAME=mbart
 export MBART_DIR_NAME=output/mbart-simplification-en
-export OUTPUT_DIR_NAME=output/cochrane/mbart-lang-toks
-export CURRENT_DIR=${PWD}
-export DATA_DIR=${CURRENT_DIR}/data/processed/cochrane
-export OUTPUT_DIR=${CURRENT_DIR}/${OUTPUT_DIR_NAME}
+
+# Setup input/output paths
+export DATA_DIR=${PWD}/data/processed/${DATASET}
+export OUTPUT_DIR=${PWD}/output/${DATASET}/${RUN_NAME}
 
 # Make output directory if it doesn't exist
 mkdir -p $OUTPUT_DIR
@@ -21,6 +25,7 @@ python -m simplepatho.run_translation \
     --model_name_or_path $MBART_DIR_NAME \
     --do_train \
     --do_eval \
+    --do_predict \
     --train_file $DATA_DIR/train.json \
     --validation_file $DATA_DIR/val.json \
     --test_file $DATA_DIR/test.json \
@@ -45,6 +50,9 @@ python -m simplepatho.run_translation \
     --save_strategy steps \
     --save_steps 500 \
     --load_best_model_at_end True \
-    --save_total_limit 5 \
+    --save_total_limit 3 \
     --fp16 \
+    --report_to wandb \
+    --run_name $RUN_NAME \
+    --group_name $DATASET \
     "$@"

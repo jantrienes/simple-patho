@@ -1,7 +1,10 @@
-export OUTPUT_DIR_NAME=output/cochrane/mbart
-export CURRENT_DIR=${PWD}
-export DATA_DIR=${CURRENT_DIR}/data/processed/cochrane
-export OUTPUT_DIR=${CURRENT_DIR}/${OUTPUT_DIR_NAME}
+# Base configuration
+export DATASET=cochrane
+export RUN_NAME=mbart
+
+# Setup input/output paths
+export DATA_DIR=${PWD}/data/processed/${DATASET}
+export OUTPUT_DIR=${PWD}/output/${DATASET}/${RUN_NAME}
 
 # Make output directory if it doesn't exist
 mkdir -p $OUTPUT_DIR
@@ -16,10 +19,10 @@ python -m simplepatho.run_translation \
     --target_lang en_SIMPLE \
     --use_custom_mbart_tokenizer True \
     --output_dir $OUTPUT_DIR \
-    --predict_with_generate \
     --max_source_length=1024 \
     --max_target_length=1024 \
     --per_device_eval_batch_size=8 \
     --per_device_train_batch_size=8 \
     --overwrite_cache \
+    --report_to none \
     "$@"

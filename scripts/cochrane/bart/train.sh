@@ -1,7 +1,11 @@
-export OUTPUT_DIR_NAME=output/cochrane/bart
-export CURRENT_DIR=${PWD}
-export DATA_DIR=${CURRENT_DIR}/data/processed/cochrane
-export OUTPUT_DIR=${CURRENT_DIR}/${OUTPUT_DIR_NAME}
+# Base configuration
+export WANDB_PROJECT=simplepatho
+export DATASET=cochrane
+export RUN_NAME=bart
+
+# Setup input/output paths
+export DATA_DIR=${PWD}/data/processed/${DATASET}
+export OUTPUT_DIR=${PWD}/output/${DATASET}/${RUN_NAME}
 
 # Make output directory if it doesn't exist
 mkdir -p $OUTPUT_DIR
@@ -10,6 +14,7 @@ python -m simplepatho.run_translation \
     --model_name_or_path facebook/bart-large \
     --do_train \
     --do_eval \
+    --do_predict \
     --train_file $DATA_DIR/train.json \
     --validation_file $DATA_DIR/val.json \
     --test_file $DATA_DIR/test.json \
@@ -30,4 +35,7 @@ python -m simplepatho.run_translation \
     --evaluation_strategy steps \
     --eval_steps 100 \
     --fp16 \
+    --report_to wandb \
+    --run_name $RUN_NAME \
+    --group_name $DATASET \
     "$@"

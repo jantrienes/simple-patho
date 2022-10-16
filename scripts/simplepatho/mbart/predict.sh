@@ -19,7 +19,6 @@ python -m simplepatho.run_translation \
     --target_lang de_SIMPLE \
     --use_custom_mbart_tokenizer True \
     --output_dir $OUTPUT_DIR \
-    --predict_with_generate \
     --max_source_length=1024 \
     --max_target_length=1024 \
     --per_device_eval_batch_size=8 \
