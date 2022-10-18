@@ -109,6 +109,31 @@ Download and preprocess raw data:
 make cochrane
 ```
 
+Corpus statistics:
+
+```sh
+python -m simplepatho.corpus_statistics \
+    --data_path data/processed/cochrane \
+    --language english \
+    --spacy_model en_core_web_sm
+
+# Expect following output:
+                             Source     Target
+Docs                          4,459      4,459
+Tokens                    1,844,617  1,052,902
+Sentences                    63,539     43,631
+Types (raw)                  29,577     20,844
+Types (lemmas)               25,534     17,074
+Avg. text length (words)        414        236
+Avg. text length (sents)         14         10
+Avg. TTR                       0.38       0.51
+Avg. Flesch-Reading Ease      46.73      42.49
+Avg. word length               4.69       4.91
+Avg. sent length                 29         24
+Novelty                              40/70/82%
+CMP                                       0.59
+```
+
 Train models:
 
 ```sh
