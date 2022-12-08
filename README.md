@@ -193,4 +193,4 @@ If you use the resources in this repository, please cite:
 
 ## Contact
 
-If you have any question, please contact Jan Trienes at `jan.trienes [AT] uni-due.de`.
+If you have any question, please contact Jan Trienes at `jan.trienes [AT] gmail.com`.
