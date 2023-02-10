@@ -23,7 +23,7 @@ dependencies:
     - transformers==4.20.1
     - datasets==2.3.2
     - rouge-score==0.0.4
-    - git+https://github.com/feralvam/easse.git@8df369f025a7c927425482e802fb546fd5d06d84
+    - git+https://github.com/feralvam/easse.git@a1108d2054f5badb4e2ca35cf0d8c8d764d56acb
     - tensorboard
     - wandb
     - sentencepiece==0.1.97
