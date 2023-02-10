@@ -1,10 +1,7 @@
 jupyter
 jupyter_contrib_nbextensions
-jupyterlab
-jupyterlab-code-formatter
-jupyterlab-execute-time
 pytest
 pytest-cov
 pylint
-black
+black~=23.0
 isort

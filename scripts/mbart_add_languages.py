@@ -31,7 +31,7 @@ def main(args):
         tokenizer.add_special_tokens(special_tokens)
         print("tokenizer len ", tokenizer.vocab_size)
 
-        for (new_tag, init_tag) in zip(args.add_language_tags, args.initialize_tags):
+        for new_tag, init_tag in zip(args.add_language_tags, args.initialize_tags):
             init_tag_id = tokenizer.lang_code_to_id[init_tag]
             print("init_tag_id ", init_tag_id)
             init_embed = model.model.shared.weight[init_tag_id].unsqueeze(0)
