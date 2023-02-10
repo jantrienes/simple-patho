@@ -2,7 +2,7 @@
 
 This repository provides the code for following paper:
 
-> Jan Trienes, Jörg Schlötterer, Hans-Ulrich Schildhaus, Christin Seifert. 2022. **Patient-friendly Clinical Notes: Towards a new Text Simplification Dataset.** _To Appear_.
+> Jan Trienes, Jörg Schlötterer, Hans-Ulrich Schildhaus, and Christin Seifert. 2022. [Patient-friendly Clinical Notes: Towards a new Text Simplification Dataset](https://aclanthology.org/2022.tsar-1.3/). In _Proceedings of the Workshop on Text Simplification, Accessibility, and Readability (TSAR-2022)_, pages 19–27, Abu Dhabi, United Arab Emirates (Virtual). Association for Computational Linguistics.
 
 Sharing of the dataset is currently underway. For the time being, the code in the repository can be run with the paragraph-level simplification dataset by [Devaraj et al., (NAACL 2021)](https://doi.org/10.18653/v1/2021.naacl-main.395).
 
@@ -188,7 +188,20 @@ make lint
 If you use the resources in this repository, please cite:
 
 ```bibtex
-<!-- TODO -->
+@inproceedings{trienes-etal-2022-patient,
+    title = "Patient-friendly Clinical Notes: Towards a new Text Simplification Dataset",
+    author = {Trienes, Jan  and
+      Schl{\"o}tterer, J{\"o}rg  and
+      Schildhaus, Hans-Ulrich  and
+      Seifert, Christin},
+    booktitle = "Proceedings of the Workshop on Text Simplification, Accessibility, and Readability (TSAR-2022)",
+    month = dec,
+    year = "2022",
+    address = "Abu Dhabi, United Arab Emirates (Virtual)",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.tsar-1.3",
+    pages = "19--27",
+}
 ```
 
 ## Contact
