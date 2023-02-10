@@ -1,6 +1,12 @@
 name: test
 on: [push]
 
+env:
+  # tseval (via easse) has a dependency on the deprecated sklearn package
+  # Statement below fixes a build error, but should be removed when below PR is merged
+  # https://github.com/facebookresearch/text-simplification-evaluation/pull/3
+  SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
+
 jobs:
   test:
     runs-on: ubuntu-latest
