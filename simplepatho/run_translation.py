@@ -33,6 +33,8 @@ from transformers import (
     Seq2SeqTrainingArguments,
     default_data_collator,
     set_seed,
+    RobertaConfig,
+    RobertaModel
 )
 from transformers.integrations import rewrite_logs
 from transformers.trainer_utils import get_last_checkpoint
@@ -89,6 +91,12 @@ class ModelArguments:
         default=False,
         metadata={
             "help": "Train an EncoderDecoderModel where both encoder and decoder are initialized with BERT embeddings. Use `model_name_or_path` to specify the BERT checkpoint that should be used."
+        },
+    )
+    encoder2rnd: Optional[bool] = field(
+        default=False,
+        metadata={
+            "help": "Train an EncoderDecoderModel with a pre-trained encoder and a RoBERTa decoder that is initialized from scratch."
         },
     )
     tie_encoder_decoder: Optional[bool] = field(
@@ -452,6 +460,35 @@ def main():
             model_args.model_name_or_path,
             model_args.model_name_or_path,
             tie_encoder_decoder=model_args.tie_encoder_decoder,
+            from_tf=bool(".ckpt" in model_args.model_name_or_path),
+            cache_dir=model_args.cache_dir,
+            revision=model_args.model_revision,
+            use_auth_token=True if model_args.use_auth_token else None,
+        )
+        model.config.decoder_start_token_id = tokenizer.bos_token_id
+        model.config.eos_token_id = tokenizer.eos_token_id
+        model.config.pad_token_id = tokenizer.pad_token_id
+        model.config.vocab_size = model.config.decoder.vocab_size
+    elif model_args.encoder2rnd:
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_args.model_name_or_path,
+            cache_dir=model_args.cache_dir,
+            use_fast=model_args.use_fast_tokenizer,
+            revision=model_args.model_revision,
+            use_auth_token=True if model_args.use_auth_token else None,
+        )
+        tokenizer.bos_token = tokenizer.cls_token
+        tokenizer.eos_token = tokenizer.sep_token
+
+        decoder_model_path = os.path.join(training_args.output_dir, "decoder-initialization")
+        decoder_config = RobertaConfig(vocab_size=len(tokenizer))
+        decoder_model = RobertaModel(decoder_config)
+        decoder_model.save_pretrained(decoder_model_path)
+
+        model = EncoderDecoderModel.from_encoder_decoder_pretrained(
+            model_args.model_name_or_path,
+            decoder_model_path,
+            tie_encoder_decoder=False,
             from_tf=bool(".ckpt" in model_args.model_name_or_path),
             cache_dir=model_args.cache_dir,
             revision=model_args.model_revision,
