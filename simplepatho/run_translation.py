@@ -30,11 +30,11 @@ from transformers import (
     MBart50TokenizerFast,
     MBartTokenizer,
     MBartTokenizerFast,
+    RobertaConfig,
+    RobertaModel,
     Seq2SeqTrainingArguments,
     default_data_collator,
     set_seed,
-    RobertaConfig,
-    RobertaModel
 )
 from transformers.integrations import rewrite_logs
 from transformers.trainer_utils import get_last_checkpoint
