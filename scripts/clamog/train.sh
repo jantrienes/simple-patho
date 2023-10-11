@@ -4,6 +4,9 @@
 #SBATCH --time 05:00:00
 #SBATCH --partition=GPUampere,GPUhopper
 
+eval "$(conda shell.bash hook)"
+conda activate simple-patho
+
 export WANDB_PROJECT=simplepatho-clamog
 dataset=d2h-v1-aligned-para
 if [[ $MODEL_NAME_OR_PATH == *"models/"* ]]; then

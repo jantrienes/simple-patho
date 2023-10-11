@@ -4,6 +4,9 @@
 #SBATCH --time 05:00:00
 #SBATCH --partition=GPUampere,GPUhopper
 
+eval "$(conda shell.bash hook)"
+conda activate simple-patho
+
 export WANDB_PROJECT=simplepatho-clamog
 dataset=d2h-v1-aligned-para
 if [[ $MODEL_NAME_OR_PATH == *"models/"* ]]; then
@@ -39,7 +42,7 @@ python -m simplepatho.run_translation \
     --overwrite_cache True \
     --max_source_length=512 \
     --max_target_length=512 \
-    --num_train_epochs 200 \
+    --num_train_epochs 5 \
     --logging_strategy epoch \
     --evaluation_strategy no \
     --save_strategy no \
