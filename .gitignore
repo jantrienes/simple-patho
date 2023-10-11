@@ -1,3 +1,4 @@
+models/
 wandb
 .lock
 .vscode
