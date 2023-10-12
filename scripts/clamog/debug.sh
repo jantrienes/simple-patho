@@ -20,6 +20,8 @@ output_dir=${PWD}/output/${dataset}/${run_name}
 
 mkdir -p $output_dir
 
+# Setting the max sequence length to 510 because of a weird behavior of the roberta embedding layer when the padding token is not equal to 1.
+# https://github.com/huggingface/transformers/issues/15292
 python -m simplepatho.run_translation \
     --model_name_or_path $MODEL_NAME_OR_PATH \
     --encoder2rnd True \
@@ -41,8 +43,8 @@ python -m simplepatho.run_translation \
     --warmup_ratio 0.1 \
     --overwrite_output_dir \
     --overwrite_cache True \
-    --max_source_length=512 \
-    --max_target_length=512 \
+    --max_source_length=510 \
+    --max_target_length=510 \
     --num_train_epochs 200 \
     --logging_strategy epoch \
     --evaluation_strategy no \
