@@ -14,6 +14,7 @@ if [[ $MODEL_NAME_OR_PATH == *"models/"* ]]; then
 else
     run_name=$MODEL_NAME_OR_PATH
 fi
+run_name=${run_name}-debug
 data_dir=${PWD}/data/processed/${dataset}
 output_dir=${PWD}/output/${dataset}/${run_name}
 
@@ -42,7 +43,7 @@ python -m simplepatho.run_translation \
     --overwrite_cache True \
     --max_source_length=512 \
     --max_target_length=512 \
-    --num_train_epochs 5 \
+    --num_train_epochs 200 \
     --logging_strategy epoch \
     --evaluation_strategy no \
     --save_strategy no \
@@ -52,4 +53,7 @@ python -m simplepatho.run_translation \
     --report_to wandb \
     --run_name $run_name \
     --group_name $dataset \
+    --max_train_samples 10 \
+    --max_eval_samples 10 \
+    --max_predict_samples 10 \
     "$@"

@@ -9,18 +9,22 @@ conda activate simple-patho
 
 export WANDB_PROJECT=simplepatho-clamog
 dataset=d2h-v1-aligned-para
-if [[ $MODEL_NAME_OR_PATH == *"models/"* ]]; then
-    run_name=$(echo "$MODEL_NAME_OR_PATH" | awk -F'/' '{print $NF}')
-else
-    run_name=$MODEL_NAME_OR_PATH
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 arg1 arg2 [other args...]"
+  exit 1
 fi
+model_name_or_path="$1"
+run_name="$2"
+shift 2
+
 data_dir=${PWD}/data/processed/${dataset}
 output_dir=${PWD}/output/${dataset}/${run_name}
 
 mkdir -p $output_dir
 
 python -m simplepatho.run_translation \
-    --model_name_or_path $MODEL_NAME_OR_PATH \
+    --model_name_or_path $model_name_or_path \
     --encoder2rnd True \
     --bad_words [CLS] \
     --additional_tokenization_cleanup True \
@@ -34,8 +38,8 @@ python -m simplepatho.run_translation \
     --target_lang de_SIMPLE \
     --output_dir $output_dir \
     --logging_dir $output_dir/logs \
-    --per_device_train_batch_size=16 \
-    --per_device_eval_batch_size=16 \
+    --per_device_train_batch_size=8 \
+    --per_device_eval_batch_size=8 \
     --learning_rate=3e-5 \
     --warmup_ratio 0.1 \
     --overwrite_output_dir \
