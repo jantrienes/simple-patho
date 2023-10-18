@@ -9,21 +9,25 @@ conda activate simple-patho
 
 export WANDB_PROJECT=simplepatho-clamog
 dataset=d2h-v1-aligned-para
-if [[ $MODEL_NAME_OR_PATH == *"models/"* ]]; then
-    run_name=$(echo "$MODEL_NAME_OR_PATH" | awk -F'/' '{print $NF}')
-else
-    run_name=$MODEL_NAME_OR_PATH
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 arg1 arg2 [other args...]"
+  exit 1
 fi
-run_name=${run_name}-debug
+model_name_or_path="$1"
+run_name="$2-debug"
+shift 2
+
 data_dir=${PWD}/data/processed/${dataset}
 output_dir=${PWD}/output/${dataset}/${run_name}
 
 mkdir -p $output_dir
 
-# Setting the max sequence length to 510 because of a weird behavior of the roberta embedding layer when the padding token is not equal to 1.
-# https://github.com/huggingface/transformers/issues/15292
+# Setting the max sequence length to 504 (the next smallest multiple of 8 below 512)
+# This is because of a weird behavior of the roberta embedding layer when the padding token is not equal to 1.
+# See: https://github.com/huggingface/transformers/issues/15292
 python -m simplepatho.run_translation \
-    --model_name_or_path $MODEL_NAME_OR_PATH \
+    --model_name_or_path $model_name_or_path \
     --encoder2rnd True \
     --bad_words [CLS] \
     --additional_tokenization_cleanup True \
@@ -52,10 +56,11 @@ python -m simplepatho.run_translation \
     --load_best_model_at_end False \
     --save_total_limit 3 \
     --fp16 \
-    --report_to wandb \
+    --report_to none \
     --run_name $run_name \
     --group_name $dataset \
     --max_train_samples 10 \
     --max_eval_samples 10 \
     --max_predict_samples 10 \
+    --dropout 0 \
     "$@"
